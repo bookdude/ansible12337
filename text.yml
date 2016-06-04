@@ -1,0 +1,12 @@
+- hosts: local
+
+  tasks:
+    - name: Install libnss.
+      apt: pkg=libnss-myhostname state=installed
+    - name: Edit nsswitch.conf
+      lineinfile:
+       'dest=/etc/nsswitch.conf
+       regexp="^hosts"
+       line="hosts: files dns myhostname"
+       state=present'
+
